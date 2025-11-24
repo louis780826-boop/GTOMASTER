@@ -1,7 +1,7 @@
 {
   "name": "gto-master-standard-final",
   "version": "1.0.0",
-  "packageManager": "npm@10"
+  "packageManager": "npm@10",
   "private": true,
   "scripts": {
     "dev": "next dev",
