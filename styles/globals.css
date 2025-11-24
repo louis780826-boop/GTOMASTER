@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 黑金背景 */
+body {
+  @apply bg-[#0d0f15] text-gray-200;
+}
+
+/* 卡片 */
+.card-frame {
+  @apply bg-[#11131a] border border-[#2b2e36] rounded-xl p-5 shadow-lg;
+}
+
+/* 標題 */
+.gto-title {
+  @apply text-2xl font-semibold text-yellow-400 mb-4;
+}
+
+/* 章節文字 */
+.gto-section-title {
+  @apply text-lg font-semibold text-yellow-300 mb-2;
+}
+
+.gto-section-text {
+  @apply text-sm text-gray-300 leading-relaxed;
+}
+
+/* 按鈕 */
+.gto-btn {
+  @apply bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-2 px-4 rounded-lg;
+}
+
+/* 輸入框 */
+.gto-input {
+  @apply bg-[#0f1117] border border-gray-700 rounded-lg p-3 w-full text-gray-200;
+}
+
+/* 下拉式選單 */
+select {
+  @apply bg-[#0f1117] border border-gray-700 rounded-lg p-3 text-gray-200;
+}
+
+/* Navbar 選單 hover */
+.nav-item:hover {
+  @apply text-yellow-400;
+}

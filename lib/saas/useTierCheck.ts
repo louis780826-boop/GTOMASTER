@@ -1,0 +1,1 @@
+export function useTierCheck(){return {tier:'FREE'};}

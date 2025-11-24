@@ -1,0 +1,23 @@
+/* 當結果是正確的時候顯示綠色 */
+.feedback-correct {
+  color: green;
+}
+
+/* 當結果是錯誤的時候顯示紅色 */
+.feedback-wrong {
+  color: red;
+}
+
+/* 黑金風格的按鈕 */
+.btn-primary {
+  background-color: #FFD700;
+  color: #0D0F15;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c9a600;
+  cursor: pointer;
+}

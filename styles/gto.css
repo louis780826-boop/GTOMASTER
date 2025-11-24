@@ -1,0 +1,165 @@
+body {
+  background: #0d0f15;
+  color: #e8e8e8;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
+}
+
+.gto-card {
+  background: rgba(20, 20, 25, 0.6);
+  border: 1px solid rgba(216, 181, 101, 0.35);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+  box-shadow:
+    0 0 12px rgba(0, 0, 0, 0.4),
+    inset 0 0 10px rgba(216, 181, 101, 0.15);
+  transition: 0.2s ease;
+}
+
+.gto-card:hover {
+  border-color: rgba(255, 215, 125, 0.8);
+  box-shadow:
+    0 0 18px rgba(255, 215, 125, 0.4),
+    inset 0 0 16px rgba(255, 215, 125, 0.25);
+}
+
+.gto-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e9d29a;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.gto-section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #d8b565;
+  margin-bottom: 6px;
+}
+
+.gto-section-text {
+  font-size: 0.95rem;
+  color: #cfcfcf;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.hex-coach-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hex-coach-frame {
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(145deg, #1a1c22, #0d0f15);
+  clip-path: polygon(
+    25% 5%,
+    75% 5%,
+    95% 50%,
+    75% 95%,
+    25% 95%,
+    5% 50%
+  );
+  border: 2px solid rgba(216, 181, 101, 0.45);
+  box-shadow:
+    0 0 8px rgba(216, 181, 101, 0.4),
+    inset 0 0 10px rgba(216, 181, 101, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s ease;
+}
+
+.hex-coach-frame:hover {
+  border-color: rgba(255, 215, 125, 0.85);
+  box-shadow:
+    0 0 12px rgba(255, 215, 125, 0.6),
+    inset 0 0 12px rgba(255, 215, 125, 0.35);
+  transform: scale(1.04);
+}
+
+.hex-coach-core {
+  width: 72px;
+  height: 72px;
+  background: radial-gradient(circle, #1a1c22 30%, #111317 90%);
+  clip-path: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gto-reco-box {
+  background: rgba(25, 25, 30, 0.6);
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(216, 181, 101, 0.25);
+  margin-bottom: 12px;
+}
+
+.gto-reco-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 4px;
+  background: rgba(216, 181, 101, 0.15);
+  border: 1px solid rgba(216, 181, 101, 0.3);
+  color: #e9d29a;
+  border-radius: 8px;
+  font-size: 0.83rem;
+}
+
+.gto-score {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #d8b565;
+  text-align: center;
+  margin: 10px 0 16px;
+  text-shadow: 0 0 12px rgba(216, 181, 101, 0.25);
+}
+
+.gto-container {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+.gto-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0f1117;
+  border-radius: 10px;
+  border: 1px solid rgba(216, 181, 101, 0.25);
+  color: #e8e8e8;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+}
+
+.gto-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #d8b565 0%, #b89950 90%);
+  border: none;
+  border-radius: 10px;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: 0.2s ease;
+}
+
+.gto-button:hover {
+  box-shadow: 0 0 15px rgba(216, 181, 101, 0.5);
+}
+.gto-card-link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.gto-card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(255, 215, 128, 0.28);
+}

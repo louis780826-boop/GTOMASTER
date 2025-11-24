@@ -1,0 +1,425 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全站黑金背景 */
+body {
+  @apply bg-[#0D0F15] text-white antialiased;
+  background: radial-gradient(circle at top, #1a1d29 0%, #0D0F15 40%, #000 100%);
+}
+
+/* 黑金卡片 */
+.card {
+  @apply bg-[#11131A] rounded-2xl p-6 shadow-xl border border-[#1f2230];
+}
+
+/* 金色字體 */
+.text-gold {
+  color: #E8B667;
+}
+
+/* 金色邊框 */
+.border-gold {
+  border-color: #E8B667;
+}
+
+/* 金色漸層按鈕 */
+.btn-gold {
+  background: linear-gradient(135deg, #E8B667, #c3964d);
+  @apply text-black font-bold py-2 px-4 rounded-xl shadow-lg;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #f2c98e, #d09d54);
+}
+
+/* 金色標題 */
+.title-gold {
+  @apply text-3xl font-bold mb-4;
+  background: linear-gradient(90deg, #e8b667, #c3964d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 卡片光暈 */
+.card-glow {
+  box-shadow: 0 0 25px rgba(232, 182, 103, 0.15);
+}
+.text-gold {
+  color: #d1b067;
+}
+
+.gold-hover {
+  transition: 0.25s ease-out;
+  border: 1px solid #1c1e25;
+}
+
+.gold-hover:hover {
+  border-color: #b08a3a;
+  box-shadow: 0 0 14px rgba(176,138,58,0.55);
+  transform: translateY(-2px);
+}
+
+/* 淡入動畫 */
+.fade-in {
+  animation: fadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in-slow {
+  animation: fadeIn 1.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* 金色字體 */
+.text-gold {
+  color: #d1b067;
+}
+
+/* Hero 金色 outline 按鈕 */
+.gold-outline-btn {
+  border-radius: 0.75rem;
+  border: 1px solid #3a3d4a;
+  color: #d1b067;
+  background: rgba(15, 16, 24, 0.9);
+  transition: 0.25s ease-out;
+}
+.gold-outline-btn:hover {
+  border-color: #d1b067;
+  box-shadow: 0 0 16px rgba(209, 176, 103, 0.5);
+  transform: translateY(-1px);
+}
+
+/* 小金點 */
+.dot-gold {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d1b067;
+  box-shadow: 0 0 8px rgba(209, 176, 103, 0.7);
+}
+
+/* 核心標題 */
+.section-title {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f5e3a3;
+}
+.section-subtitle {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #9fa3b5;
+}
+
+/* 功能卡片 */
+.feature-card {
+  position: relative;
+  background: radial-gradient(circle at top left, rgba(209, 176, 103, 0.12), #11131a);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  border: 1px solid #262938;
+  cursor: pointer;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 226, 160, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+.feature-card:hover::before {
+  opacity: 1;
+}
+.feature-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c9aa6b;
+  margin-bottom: 0.35rem;
+}
+.feature-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5e3a3;
+  margin-bottom: 0.4rem;
+}
+.feature-body {
+  font-size: 0.82rem;
+  color: #b5b9c8;
+  line-height: 1.5;
+}
+
+/* Range mini grid 示意 */
+.range-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 2px;
+}
+.range-mini-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  border: 1px solid #232533;
+}
+.cell-raise {
+  background: linear-gradient(135deg, #f4d47f, #d1b067);
+}
+.cell-call {
+  background: linear-gradient(135deg, #5aa6ff, #2f7ddd);
+}
+.cell-mix {
+  background: radial-gradient(circle at top left, #f4d47f 0, #5aa6ff 45%, #05060a 100%);
+}
+
+/* BTN 小籌碼風格 Badge */
+.bg-gold-chip {
+  background: radial-gradient(circle at 30% 20%, #fff5d0, #d1b067);
+}
+
+/* AI 對話泡泡 */
+.bubble {
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  line-height: 1.5;
+}
+.bubble-user {
+  background: #171926;
+  border: 1px solid #303443;
+  text-align: left;
+}
+.bubble-ai {
+  background: #0e1019;
+  border: 1px solid #2b3040;
+  text-align: left;
+}
+
+/* 見證卡片 */
+.testimonial-card {
+  background: radial-gradient(circle at top left, rgba(209, 176, 103, 0.12), #11131a);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  border: 1px solid #262938;
+  font-size: 0.82rem;
+}
+.testimonial-role {
+  font-size: 0.75rem;
+  color: #c9aa6b;
+  margin-bottom: 0.35rem;
+}
+.testimonial-body {
+  color: #c6cad8;
+  line-height: 1.6;
+}
+
+/* 金光 Hover */
+.gold-hover {
+  transition: 0.25s ease-out;
+  border: 1px solid #262938;
+}
+.gold-hover:hover {
+  border-color: #d1b067;
+  box-shadow: 0 0 16px rgba(209, 176, 103, 0.55);
+  transform: translateY(-2px);
+}
+
+/* 淡入動畫 */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.9s ease-out forwards;
+}
+.fade-in-slow {
+  opacity: 0;
+  animation: fadeIn 1.3s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 動態背景球體 + 網格 */
+.hero-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(32px);
+}
+.orb-1 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, #d1b067, transparent 60%);
+  top: -40px;
+  left: -40px;
+  animation: floatOrb1 14s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #5aa6ff, transparent 60%);
+  bottom: -40px;
+  right: -20px;
+  animation: floatOrb2 18s ease-in-out infinite alternate;
+}
+.orb-3 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, #9058ff, transparent 60%);
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.4;
+}
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#1a1c27 1px, transparent 1px),
+    linear-gradient(90deg, #1a1c27 1px, transparent 1px);
+  background-size: 40px 40px;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 30px);
+  }
+}
+@keyframes floatOrb2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-40px, -20px);
+  }
+}
+
+/* 小卡片 glow 效果 */
+.card-glow {
+  box-shadow: 0 0 18px rgba(2, 3, 8, 0.95);
+}
+/* 13x13 詳細範圍表容器 */
+/* 13x13 詳細範圍表容器 */
+.range-detailed-wrapper {
+  overflow-x: auto;
+  padding: 0.4rem;
+  border-radius: 0.75rem;
+  background: radial-gradient(circle at top left, rgba(209, 176, 103, 0.08), #070811);
+  border: 1px solid #262938;
+}
+
+/* 13x13 grid：第一列是橫軸標籤，其餘是牌格 */
+.range-detailed-grid {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr)); /* 1 個軸 + 13 rank */
+  gap: 2px;
+  font-size: 10px;
+}
+
+/* 左上角空白 */
+.range-corner-cell {
+  width: 20px;
+  height: 20px;
+}
+
+/* 軸標籤 */
+.range-label-cell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c3c7d5;
+  font-size: 10px;
+}
+
+/* 每一格 */
+.range-cell {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #262938;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 手牌文字 */
+.range-cell-label {
+  font-size: 8px;
+  color: #020308;
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Raise / Call / Mix / Fold 顏色 — 低調黑金版 */
+.cell-raise {
+  background: linear-gradient(135deg, #e2c98a, #b8964f);
+}
+.cell-call {
+  background: linear-gradient(135deg, #5f7c8f, #3b4c5a);
+}
+.cell-mix {
+  background: radial-gradient(
+    circle at top left,
+    #d7bf86 0,
+    #566a7a 45%,
+    #111319 100%
+  );
+}
+.cell-fold {
+  background: #070910;
+  border-color: #20232f;
+}
+
+/* 圖例 */
+.range-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 11px;
+  color: #b8bccb;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid #34374a;
+}
+.legend-raise {
+  background: linear-gradient(135deg, #e2c98a, #b8964f);
+}
+.legend-call {
+  background: linear-gradient(135deg, #5f7c8f, #3b4c5a);
+}
+.legend-mix {
+  background: radial-gradient(
+    circle at top left,
+    #d7bf86 0,
+    #566a7a 45%,
+    #111319 100%
+  );
+}
+.legend-fold {
+  background: #070910;
+}

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全站黑金背景 */
+body {
+  @apply bg-[#0D0F15] text-white antialiased;
+  background: radial-gradient(circle at top, #1a1d29 0%, #0D0F15 40%, #000 100%);
+}
+
+/* 黑金卡片 */
+.card {
+  @apply bg-[#11131A] rounded-2xl p-6 shadow-xl border border-[#1f2230];
+}
+
+/* 金色字體 */
+.text-gold {
+  color: #E8B667;
+}
+
+/* 金色邊框 */
+.border-gold {
+  border-color: #E8B667;
+}
+
+/* 金色漸層按鈕 */
+.btn-gold {
+  background: linear-gradient(135deg, #E8B667, #c3964d);
+  @apply text-black font-bold py-2 px-4 rounded-xl shadow-lg;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #f2c98e, #d09d54);
+}
+
+/* 金色標題 */
+.title-gold {
+  @apply text-3xl font-bold mb-4;
+  background: linear-gradient(90deg, #e8b667, #c3964d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 卡片上微弱金色光暈 */
+.card-glow {
+  box-shadow: 0 0 25px rgba(232, 182, 103, 0.15);
+}
