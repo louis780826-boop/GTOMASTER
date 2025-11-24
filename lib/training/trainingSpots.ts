@@ -53,3 +53,4 @@ export const TRAINING_SPOTS: TrainingSpot[] = [
     explanation: "UTG 88 通常進入冷跟，避免過度擴張 3bet range。"
   }
 ];
+export const trainingSpots: TrainingSpot[] = [];
