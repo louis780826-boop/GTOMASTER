@@ -1,50 +1,19 @@
-"use client";
-
-import React, { useState } from "react";
-import RangeGrid from "./RangeGrid";
-
-const POSITIONS = ["UTG", "HJ", "CO", "BTN", "SB", "BB"];
+// app/range/page.tsx
+import RangeGridV3 from '@/components/RangeGridV3';
 
 export default function RangePage() {
-  const [position, setPosition] = useState<string>("BTN");
-
   return (
-    <main className="min-h-screen bg-[#05060a] text-white">
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2">
-          GTO 開局範圍表
+    <div className="min-h-screen bg-[#05060A] text-slate-50">
+      <main className="max-w-5xl mx-auto px-4 py-10">
+        <h1 className="text-2xl font-bold mb-2">
+          GTO Money – 簡化 Preflop 範圍
         </h1>
-        <p className="text-sm text-gray-400 mb-6">
-          目前為簡化版本示意圖，之後會逐步更新各位置的精準 GTO 範圍。
+        <p className="text-sm text-slate-400 mb-8">
+          此頁先提供簡化的範圍視覺化，之後你可以再接上真實 GTO 範圍資料。
         </p>
 
-        {/* 位置切換 */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {POSITIONS.map((pos) => (
-            <button
-              key={pos}
-              onClick={() => setPosition(pos)}
-              className={`px-3 py-1 rounded-full border text-sm transition
-                ${
-                  position === pos
-                    ? "bg-yellow-500 text-black border-yellow-500"
-                    : "border-gray-600 text-gray-300 hover:border-yellow-500 hover:text-yellow-300"
-                }`}
-            >
-              {pos}
-            </button>
-          ))}
-        </div>
-
-        <div className="mb-3 text-sm text-gray-300">
-          目前顯示位置：<span className="text-yellow-400 font-semibold">{position}</span>
-        </div>
-
-        {/* 範圍表格（單純 UI，使用 RangeGrid） */}
-        <div className="bg-black/40 rounded-xl border border-yellow-500/40 p-3 md:p-4">
-          <RangeGrid />
-        </div>
-      </div>
-    </main>
+        <RangeGridV3 />
+      </main>
+    </div>
   );
 }

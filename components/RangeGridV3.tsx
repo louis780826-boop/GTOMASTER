@@ -1,45 +1,46 @@
-// components/RangeGrid.tsx
+// components/RangeGridV3.tsx
 'use client';
 
-import React from "react";
+import React from 'react';
 
-const RANKS = ["A","K","Q","J","T","9","8","7","6","5","4","3","2"];
+const RANKS = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
 
-type CellType = "pair" | "suited" | "offsuit";
+type CellType = 'pair' | 'suited' | 'offsuit';
 
 function getCellType(row: number, col: number): CellType {
-  if (row === col) return "pair";
-  if (row < col) return "suited";
-  return "offsuit";
+  if (row === col) return 'pair';
+  if (row < col) return 'suited';
+  return 'offsuit';
 }
 
 function getLabel(row: number, col: number): string {
   const r1 = RANKS[row];
   const r2 = RANKS[col];
 
-  if (row === col) return `${r1}${r2}`; // AA, KK...
+  if (row === col) return `${r1}${r2}`; // AA, KK, …
 
   if (row < col) {
-    // 上三角 = 同花
+    // 上三角：同花
     return `${r1}${r2}s`;
   }
 
-  // 下三角 = 不同花
+  // 下三角：不同花
   return `${r2}${r1}o`;
 }
 
 function getCellClass(type: CellType): string {
+  // Tailwind 顏色你可以之後再微調
   switch (type) {
-    case "pair":
-      return "bg-yellow-500/80 text-black";
-    case "suited":
-      return "bg-emerald-500/70 text-black";
-    case "offsuit":
-      return "bg-slate-700 text-slate-100";
+    case 'pair':
+      return 'bg-yellow-500/80 text-black';
+    case 'suited':
+      return 'bg-emerald-500/70 text-black';
+    case 'offsuit':
+      return 'bg-slate-700 text-slate-100';
   }
 }
 
-export default function RangeGrid() {
+export default function RangeGridV3() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-4">
@@ -47,7 +48,7 @@ export default function RangeGrid() {
           Preflop 簡化範圍表（展示用）
         </h2>
         <p className="text-xs text-slate-400">
-          上三角 = 同花，下三角 = 不同花，對角線 = 口袋對
+          上三角 = 同花， 下三角 = 不同花，對角線 = 口袋對
         </p>
       </div>
 
@@ -56,7 +57,7 @@ export default function RangeGrid() {
           {/* 左上角空白 */}
           <div />
 
-          {/* 欄標 */}
+          {/* 欄標：橫向 rank */}
           <div className="grid grid-cols-13 gap-1">
             {RANKS.map((r) => (
               <div
@@ -71,11 +72,12 @@ export default function RangeGrid() {
           {/* 列 */}
           {RANKS.map((rowRank, rowIdx) => (
             <React.Fragment key={`row-${rowRank}`}>
-              {/* 列標 */}
+              {/* 列標：縱向 rank */}
               <div className="h-6 flex items-center justify-center text-xs font-semibold text-slate-300">
                 {rowRank}
               </div>
 
+              {/* 13x13 格子 */}
               <div className="grid grid-cols-13 gap-1">
                 {RANKS.map((_, colIdx) => {
                   const type = getCellType(rowIdx, colIdx);
