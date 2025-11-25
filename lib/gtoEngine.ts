@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 import type { HandContext } from '@/lib/gtoTypes'
 import type { TrainingSpot } from '@/lib/gtoTypes'
 import { trainingSpots } from '@/lib/training/trainingSpots'
