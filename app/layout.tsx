@@ -1,20 +1,25 @@
-
+// src/app/layout.tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import type { ReactNode } from "react";
-import Navbar from "../components/Navbar";
 
-export const metadata = {
-  title: "GTO+ MASTER",
-  description: "Poker GTO Training & Range System",
+const inter = Inter({
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "GTO Money",
+  description: "GTO Money – 撲克 GTO 練習與金流系統",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="zh-Hant">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

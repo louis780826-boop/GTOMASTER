@@ -1,65 +1,55 @@
 // utils/practiceEngineChoice.ts
-// GTO 三選一題型：RAISE / CALL / FOLD
+// 修正版：配合 lib/range/types.ts 的 RangeEntry 欄位（raiseFreq/callFreq/foldFreq）
 
 import { TRAINING_SPOTS } from "../lib/training/trainingSpots";
-import { POSITION_RANGES } from "../lib/range/rangeData";
+import { getRangeForPosition } from "../lib/range/rangeLoader";
 
 type Action = "RAISE" | "CALL" | "FOLD";
 
-export function generateChoiceQuestion() {
-  const useTraining = Math.random() < 0.5;
+export interface PracticeResult {
+  correctAction: Action;
+  suggestion: string;
+  rangeInfo: string;
+}
 
-  if (useTraining && TRAINING_SPOTS.length > 0) {
-    const idx = Math.floor(Math.random() * TRAINING_SPOTS.length);
-    const spot = TRAINING_SPOTS[idx];
+export function evaluatePractice(
+  position: string,
+  combo: string
+): PracticeResult {
+  const range = getRangeForPosition(position);
+  const entry = range[combo.toUpperCase()];
 
-    const prompt = `${spot.heroPos} 對 ${spot.villainPos} · ${spot.stack}bb\n手牌：${spot.combo}\n在這個情境下，GTO 建議的主要動作是？`;
+  let correctAction: Action = "FOLD";
+
+  if (entry) {
+    const r = entry.raiseFreq ?? 0;
+    const c = entry.callFreq ?? 0;
+    const f = entry.foldFreq ?? 0;
+
+    if (r > c && r > f) {
+      correctAction = "RAISE";
+    } else if (c > r && c > f) {
+      correctAction = "CALL";
+    } else {
+      correctAction = "FOLD";
+    }
 
     return {
-      type: "choice",
-      source: "training",
-      heroPos: spot.heroPos,
-      villainPos: spot.villainPos,
-      combo: spot.combo,
-      stack: spot.stack,
-      prompt,
-      correctAnswer: spot.correctAction as Action,
-      explanation: spot.explanation,
-      check: (ans: string) => ans === spot.correctAction
+      correctAction,
+      suggestion: `在 ${position.toUpperCase()} 位置，${combo.toUpperCase()} 的 GTO 傾向動作是 ${correctAction}。`,
+      rangeInfo: `R:${r.toFixed(2)} C:${c.toFixed(2)} F:${f.toFixed(2)}`,
     };
   }
 
-  // 用 13×13 範圍隨機抽一手牌
-  const posIndex = Math.floor(Math.random() * POSITION_RANGES.length);
-  const pos = POSITION_RANGES[posIndex];
-
-  const rowIdx = Math.floor(Math.random() * pos.grid.length);
-  const colIdx = Math.floor(Math.random() * pos.grid[0].length);
-  const cell = pos.grid[rowIdx][colIdx];
-
-  let correct: Action = "FOLD";
-  if (cell.variant === "strong") correct = "RAISE";
-  else if (cell.variant === "mix") correct = Math.random() < 0.5 ? "RAISE" : "CALL";
-
-  const prompt = `${pos.name} 開局 · 100bb\n手牌：${cell.label}\n在這個位置，這手牌的主要 GTO 動作是？`;
-
-  const explanation =
-    cell.variant === "strong"
-      ? `${cell.label} 在 ${pos.name} 屬於高頻開局 / 進攻手牌，因此 GTO 以主動出手為主。`
-      : cell.variant === "mix"
-      ? `${cell.label} 在 ${pos.name} 屬於混合策略手牌，會在不同情境下選擇進攻或跟注。`
-      : `${cell.label} 在 ${pos.name} 幾乎不會主動參與底池，GTO 以棄牌為主。`;
-
+  // 沒有 range 資料時的 fallback
   return {
-    type: "choice",
-    source: "range",
-    heroPos: pos.name,
-    villainPos: "",
-    combo: cell.label,
-    stack: 100,
-    prompt,
-    correctAnswer: correct,
-    explanation,
-    check: (ans: string) => ans === correct
+    correctAction,
+    suggestion: `在 ${position.toUpperCase()} 位置，${combo.toUpperCase()} 沒有對應的範圍資料，預設為 FOLD。`,
+    rangeInfo: "無範圍資料",
   };
+}
+
+export function getRandomTrainingSpot() {
+  const idx = Math.floor(Math.random() * TRAINING_SPOTS.length);
+  return TRAINING_SPOTS[idx];
 }

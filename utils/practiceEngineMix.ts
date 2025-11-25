@@ -1,49 +1,91 @@
 // utils/practiceEngineMix.ts
 // MIX% 題型：問「這手牌 GTO 的主力動作傾向」
+// 改版：不再使用已刪除的 rangeData，改用 lib/range/rangeLoader
 
-import { POSITION_RANGES } from "../lib/range/rangeData";
+import { getRangeForPosition } from "../lib/range/rangeLoader";
+import type { RangeTable } from "../lib/range/types";
 
 type MainAction = "RAISE" | "CALL" | "FOLD";
 
-interface MixProfile {
-  main: MainAction;
-  raise: number;
-  call: number;
-  fold: number;
+export interface MixQuestion {
+  position: string;
+  combo: string;
+  correctMainAction: MainAction;
+  raiseFreq: number;
+  callFreq: number;
+  foldFreq: number;
+  explanation: string;
 }
 
-function profileFromVariant(variant: "strong" | "mix" | "fold"): MixProfile {
-  if (variant === "strong") {
-    return { main: "RAISE", raise: 70, call: 20, fold: 10 };
-  }
-  if (variant === "mix") {
-    return { main: "CALL", raise: 35, call: 45, fold: 20 };
-  }
-  return { main: "FOLD", raise: 10, call: 15, fold: 75 };
+/**
+ * 從一個 RangeTable 中隨機抽一個有資料的牌型
+ */
+function pickRandomCombo(range: RangeTable): [string, RangeTable[string]] | null {
+  const entries = Object.entries(range);
+  if (entries.length === 0) return null;
+  const idx = Math.floor(Math.random() * entries.length);
+  return entries[idx];
 }
 
-export function generateMixQuestion() {
-  // 從範圍表抽題
-  const posIndex = Math.floor(Math.random() * POSITION_RANGES.length);
-  const pos = POSITION_RANGES[posIndex];
+/**
+ * 根據三個頻率決定主力動作
+ */
+function getMainAction(r: number, c: number, f: number): MainAction {
+  if (r >= c && r >= f) return "RAISE";
+  if (c >= r && c >= f) return "CALL";
+  return "FOLD";
+}
 
-  const rowIdx = Math.floor(Math.random() * pos.grid.length);
-  const colIdx = Math.floor(Math.random() * pos.grid[0].length);
-  const cell = pos.grid[rowIdx][colIdx];
+/**
+ * 產生一題 MIX 題目：
+ * - 給定 position（UTG / HJ / CO / BTN / SB / BB）
+ * - 從該位置的 range 中抓一手牌
+ * - 問：這手牌 GTO 主力動作是哪一個
+ */
+export function generateMixQuestion(position: string): MixQuestion {
+  const pos = position.toUpperCase().trim();
+  const rangeTable = getRangeForPosition(pos);
 
-  const prof = profileFromVariant(cell.variant);
+  const picked = pickRandomCombo(rangeTable);
 
-  const prompt = `${pos.name} 開局 · 100bb\n手牌：${cell.label}\n\n假設 GTO 頻率為：\n- Raise：${prof.raise}%\n- Call：${prof.call}%\n- Fold：${prof.fold}%\n\n在實戰中，你會把這手牌當作哪一種「主力動作」？`;
+  // 如果現在 rangeTable 還是空的（沒有真實資料），就用預設示意題
+  if (!picked) {
+    const fallbackCombo = "AKs";
+    const r = 0.7;
+    const c = 0.2;
+    const f = 0.1;
+    const main = getMainAction(r, c, f);
 
-  const explanation = `在 ${pos.name}，${cell.label} 的 GTO 行為大致是 Raise ${prof.raise}%，Call ${prof.call}%，Fold ${prof.fold}%。因此整體來說，它更偏向「${prof.main}」的角色。`;
+    return {
+      position: pos,
+      combo: fallbackCombo,
+      correctMainAction: main,
+      raiseFreq: r,
+      callFreq: c,
+      foldFreq: f,
+      explanation: `目前 ${pos} 的實際範圍資料尚未載入，先以示意手牌 ${fallbackCombo} 當範例題，假設其 GTO 為 R:${r} / C:${c} / F:${f}。`,
+    };
+  }
+
+  const [combo, entry] = picked;
+  const r = entry.raiseFreq ?? 0;
+  const c = entry.callFreq ?? 0;
+  const f = entry.foldFreq ?? 0;
+  const main = getMainAction(r, c, f);
+
+  const explanationLines: string[] = [];
+
+  explanationLines.push(`位置：${pos}，手牌：${combo}`);
+  explanationLines.push(`GTO 頻率約為：Raise ${r.toFixed(2)}，Call ${c.toFixed(2)}，Fold ${f.toFixed(2)}。`);
+  explanationLines.push(`因此主力動作為：${main}。`);
 
   return {
-    type: "mix",
-    position: pos.name,
-    combo: cell.label,
-    prompt,
-    correctAnswer: prof.main,
-    explanation,
-    check: (ans: string) => ans === prof.main
+    position: pos,
+    combo,
+    correctMainAction: main,
+    raiseFreq: r,
+    callFreq: c,
+    foldFreq: f,
+    explanation: explanationLines.join("\n"),
   };
 }
