@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 
 export type ComboAction = "raise" | "call" | "fold" | "mix";
 

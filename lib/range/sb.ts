@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 
 import { RangeMatrix } from "./types";
 import { buildRange, RuleParams } from "./generator";

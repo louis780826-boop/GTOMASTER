@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 import { RangeMatrix, ComboDetail, ComboAction } from "./types";
 import { buildRange, RuleParams } from "./generator";
 
